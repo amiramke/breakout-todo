@@ -1,0 +1,18 @@
+<h2><%= @todo_list.name %></h2>
+<%= form_for @todo_list do |f| %>
+  <%= f.fields_for :tasks, @task do |t| %>
+    <%= t.text_field :content %>
+  <%end%>
+  <%= f.submit "Add Task"%>
+<% end %>
+
+<ul>
+  <% @todo_list.tasks.each do |task| %>
+    <% unless task.new_record? %>
+      <li>
+        <%= task.content %>
+        <%= link_to '(delete)', task_path(task), :method => :delete %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

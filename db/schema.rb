@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702225859) do
+ActiveRecord::Schema.define(:version => 20121119002112) do
+
+  create_table "tasks", :force => true do |t|
+    t.string   "content"
+    t.integer  "todo_list_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "tasks", ["todo_list_id"], :name => "index_tasks_on_todo_list_id"
+
+  create_table "todo_lists", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
